@@ -1,0 +1,71 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal{
+    width:520px;
+    max-width:95%;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 25px;
+    border-bottom:1px solid #eee;
+}
+
+.closeBtn{
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.body{
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.body input,
+.body textarea,
+.body select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+}
+
+.total{
+    display:flex;
+    justify-content:space-between;
+    font-size:20px;
+    margin-top:10px;
+}
+
+.orderBtn{
+    margin-top:20px;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#ff8c00;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
