@@ -1,10 +1,22 @@
-/* About Section Styles */
+/* ===========================
+   About Section Styles
+=========================== */
 
 .aboutSection {
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
-  background-color: var(--bg-white);
+  background: var(--card-background);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+
+  transition:
+    background-color .3s ease,
+    color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
 }
 
 .aboutHeader {
@@ -15,8 +27,8 @@
 .aboutTitle {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  color: var(--card-text);
+  margin-bottom: .5rem;
 }
 
 .aboutContent {
@@ -28,13 +40,17 @@
 
 .aboutText {
   line-height: 1.8;
-  color: var(--text-dark);
+  color: var(--secondary-text);
 }
 
 .aboutText p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
 }
+
+/* ===========================
+   Statistik
+=========================== */
 
 .statsGrid {
   display: grid;
@@ -44,13 +60,13 @@
 }
 
 .statCard {
-  background: linear-gradient(135deg, #ff9500 0%, #e68a00 100%);
+  background: linear-gradient(135deg, #ff9500 0%, #ff7b00 100%);
   color: white;
   padding: 2rem;
-  border-radius: var(--radius);
+  border-radius: 16px;
   text-align: center;
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: all .3s ease;
 }
 
 .statCard:hover {
@@ -61,28 +77,68 @@
 .statNumber {
   font-size: 2.5rem;
   font-weight: 800;
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
 }
 
 .statLabel {
   font-size: 1rem;
-  opacity: 0.95;
+  opacity: .95;
 }
 
+/* ===========================
+   Gambar
+=========================== */
+
 .aboutImage {
-  border-radius: var(--radius);
+  border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  border: 1px solid var(--card-border);
 }
 
 .aboutImage img {
   width: 100%;
-  height: auto;
   display: block;
+  transition: transform .4s ease;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.aboutImage:hover img {
+  transform: scale(1.05);
+}
+
+/* ===========================
+   Dark Mode
+=========================== */
+
+:global(body.dark-mode) .aboutSection {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+
+:global(body.dark-mode) .aboutTitle {
+  color: #ffffff;
+}
+
+:global(body.dark-mode) .aboutText {
+  color: #d6d6d6;
+}
+
+:global(body.dark-mode) .aboutImage {
+  border: 1px solid #3a3a3a;
+}
+
+:global(body.dark-mode) .statCard {
+  background: linear-gradient(135deg, #ff9800, #ff6d00);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, .4);
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width:768px) {
+
   .aboutSection {
     padding: 3rem 1.5rem;
   }
@@ -114,17 +170,19 @@
   }
 
   .statLabel {
-    font-size: 0.9rem;
+    font-size: .9rem;
   }
+
 }
 
-@media (max-width: 480px) {
+@media (max-width:480px) {
+
   .aboutSection {
     padding: 2rem 1rem;
   }
 
   .aboutTitle {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .aboutText p {
@@ -133,7 +191,6 @@
 
   .statsGrid {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
 
   .statCard {
@@ -145,6 +202,7 @@
   }
 
   .statLabel {
-    font-size: 0.85rem;
+    font-size: .85rem;
   }
+
 }

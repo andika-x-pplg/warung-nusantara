@@ -1,10 +1,23 @@
-/* Contact Section Styles */
+/* ==========================================
+   Contact Section Styles
+========================================== */
 
 .contactSection {
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 2rem;
-  background-color: var(--bg-light);
+
+  background: var(--card-background);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+
+  transition:
+    background-color .3s ease,
+    color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
 }
 
 .contactHeader {
@@ -15,8 +28,8 @@
 .contactTitle {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  color: var(--card-text);
+  margin-bottom: .5rem;
 }
 
 .contactContent {
@@ -26,6 +39,10 @@
   align-items: start;
 }
 
+/* ==========================================
+   Contact Cards
+========================================== */
+
 .infoCards {
   display: flex;
   flex-direction: column;
@@ -33,18 +50,26 @@
 }
 
 .infoCard {
-  background-color: var(--bg-white);
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
   padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+
   display: flex;
   gap: 1.5rem;
-  transition: var(--transition);
+
+  box-shadow: var(--card-shadow);
+
+  transition:
+    transform .3s ease,
+    background-color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
 }
 
 .infoCard:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
 }
 
 .infoIcon {
@@ -54,34 +79,45 @@
 }
 
 .infoDetails h3 {
+  margin-bottom: .5rem;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  color: var(--card-text);
 }
 
 .infoDetails p {
-  color: var(--text-light);
-  font-size: 1rem;
+  color: var(--secondary-text);
+  line-height: 1.6;
 }
 
+/* ==========================================
+   Google Maps
+========================================== */
+
 .mapContainer {
-  background-color: var(--bg-white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
   height: 400px;
+  overflow: hidden;
+
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+
+  box-shadow: var(--card-shadow);
 }
 
 .mapPlaceholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #ff9500 0%, #e68a00 100%);
+
+  background: linear-gradient(135deg, #ff9800, #ff6d00);
+
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
   color: white;
   text-align: center;
+
   padding: 2rem;
 }
 
@@ -90,8 +126,52 @@
   font-weight: 600;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ==========================================
+   Dark Mode
+========================================== */
+
+:global(body.dark-mode) .contactSection {
+  background: #242424;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+
+:global(body.dark-mode) .contactTitle {
+  color: #ffffff;
+}
+
+:global(body.dark-mode) .infoCard {
+  background: #2d2d2d;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+}
+
+:global(body.dark-mode) .infoCard:hover {
+  background: #343434;
+  border-color: rgba(255, 149, 0, .35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .45);
+}
+
+:global(body.dark-mode) .infoDetails h3 {
+  color: #ffffff;
+}
+
+:global(body.dark-mode) .infoDetails p {
+  color: #cfcfcf;
+}
+
+:global(body.dark-mode) .mapContainer {
+  background: #2d2d2d;
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .4);
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:768px) {
+
   .contactSection {
     padding: 3rem 1.5rem;
   }
@@ -112,15 +192,17 @@
   .infoCard {
     padding: 1.5rem;
   }
+
 }
 
-@media (max-width: 480px) {
+@media (max-width:480px) {
+
   .contactSection {
     padding: 2rem 1rem;
   }
 
   .contactTitle {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 
   .infoCard {
@@ -137,7 +219,7 @@
   }
 
   .infoDetails p {
-    font-size: 0.95rem;
+    font-size: .95rem;
   }
 
   .mapContainer {
@@ -147,4 +229,5 @@
   .mapPlaceholder div {
     font-size: 1rem;
   }
+
 }

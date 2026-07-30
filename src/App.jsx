@@ -9,6 +9,7 @@ import MenuSection from './components/MenuSection';
 import About from './components/About';
 import Contact from './components/Contact';
 import Cart from './components/Cart';
+import CheckoutModal from './components/CheckoutModal';
 import Footer from './components/Footer';
 
 /**
@@ -19,6 +20,7 @@ function App() {
   // State Management
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -98,8 +100,23 @@ function App() {
     menuSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Calculate total cart items
+  // Calculate total cart items and price
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const totalCartPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // Open checkout modal from cart
+  const handleCheckout = () => {
+    setIsCheckoutOpen(true);
+  };
+
+  // After successful order: clear cart, close cart sidebar
+  const handleOrderSuccess = () => {
+    setCartItems([]);
+    setIsCartOpen(false);
+  };
 
   // Simple notification system (could be enhanced with toast library)
   const showNotification = (message) => {
@@ -153,6 +170,17 @@ function App() {
         cartItems={cartItems}
         onUpdateQuantity={handleUpdateQuantity}
         onRemoveItem={handleRemoveItem}
+        onCheckout={handleCheckout}
+      />
+
+      {/* Checkout Modal */}
+      <CheckoutModal
+        isOpen={isCheckoutOpen}
+        onClose={() => setIsCheckoutOpen(false)}
+        cartItems={cartItems}
+        totalPrice={totalCartPrice}
+        totalItems={totalCartItems}
+        onOrderSuccess={handleOrderSuccess}
       />
 
       {/* Footer */}

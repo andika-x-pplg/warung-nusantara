@@ -1,2 +1,19 @@
 /* This file is imported from styles/index.css in App.jsx */
 /* All global styles are defined in src/styles/index.css */
+:root {
+    --page-background: #ffffff;
+    --card-background: #ffffff;
+    --card-text: #243447;
+    --secondary-text: #7f8c8d;
+    --card-border: #e5e7eb;
+    --card-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+} 
+
+body.dark-mode {
+    --page-background: #171717;
+    --card-background: #1f2937;
+    --card-text: #f8fafc;
+    --secondary-text: #cbd5e1;
+    --card-border: #374151;
+    --card-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}

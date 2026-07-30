@@ -1,28 +1,37 @@
-/* Hero Section Styles */
+/* ==========================================
+   Hero Section
+========================================== */
 
 .hero {
   width: 100%;
   min-height: 600px;
-  background: linear-gradient(135deg, #ff9500 0%, #e68a00 100%);
+
+  background: linear-gradient(135deg, #ff9500, #e68a00);
+
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+
   position: relative;
   overflow: hidden;
-  margin-top: 0;
+
+  transition: background .4s ease;
 }
 
 .heroContent {
   max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+
+  margin: auto;
   padding: 4rem 2rem;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
+
   position: relative;
   z-index: 2;
-  width: 100%;
 }
 
 .heroText {
@@ -34,116 +43,216 @@
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 1rem;
-  animation: slideInLeft 0.8s ease;
+
+  animation: slideInLeft .8s ease;
 }
 
 .heroSubtitle {
   font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, .92);
+
   margin-bottom: 2rem;
-  line-height: 1.5;
-  animation: slideInLeft 0.8s ease 0.2s backwards;
+
+  animation: slideInLeft .8s ease .2s backwards;
 }
 
 .heroButton {
   display: inline-block;
+
   padding: 1rem 2.5rem;
-  background-color: white;
+
+  background: white;
   color: var(--primary-color);
+
   border: none;
   border-radius: var(--radius);
+
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
+
   cursor: pointer;
-  transition: var(--transition);
-  animation: slideInLeft 0.8s ease 0.4s backwards;
+
+  transition: .3s;
+
+  animation: slideInLeft .8s ease .4s backwards;
 }
 
 .heroButton:hover {
-  background-color: var(--bg-light);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+
+  background: #fff8ef;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
 }
 
 .heroImage {
-  animation: slideInRight 0.8s ease 0.2s backwards;
+  animation: slideInRight .8s ease .2s backwards;
 }
 
 .heroImage img {
   width: 100%;
   max-width: 500px;
-  height: auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
+
+  border-radius: 18px;
+
   object-fit: cover;
+
+  box-shadow: var(--shadow-lg);
+
+  transition: .35s;
 }
 
-/* Decorative Elements */
+.heroImage img:hover {
+  transform: scale(1.03);
+}
+
+/* ==========================================
+   Decorative Circle
+========================================== */
+
 .heroDecor {
   position: absolute;
+
   width: 400px;
   height: 400px;
+
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+
+  background: rgba(255, 255, 255, .10);
+
   z-index: 1;
 }
 
 .decorTop {
   top: -200px;
   right: -200px;
-  animation: float 6s ease-in-out infinite;
+
+  animation: float 6s ease infinite;
 }
 
 .decorBottom {
-  bottom: -200px;
   left: -200px;
-  animation: float 6s ease-in-out infinite 2s;
+  bottom: -200px;
+
+  animation: float 6s ease infinite 2s;
 }
 
-/* Animations */
+/* ==========================================
+   DARK MODE
+========================================== */
+
+:global(body.dark-mode) .hero {
+
+  background:
+    linear-gradient(135deg,
+      #1b1b1b 0%,
+      #242424 45%,
+      #2f2f2f 100%);
+
+}
+
+:global(body.dark-mode) .heroTitle {
+  color: #ffffff;
+}
+
+:global(body.dark-mode) .heroSubtitle {
+  color: #d6d6d6;
+}
+
+:global(body.dark-mode) .heroButton {
+
+  background: #ff9500;
+  color: white;
+
+}
+
+:global(body.dark-mode) .heroButton:hover {
+
+  background: #ff7b00;
+
+}
+
+:global(body.dark-mode) .heroImage img {
+
+  border: 1px solid #3a3a3a;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, .45);
+
+}
+
+:global(body.dark-mode) .heroDecor {
+
+  background:
+    rgba(255, 255, 255, .04);
+
+}
+
+/* ==========================================
+   Animation
+========================================== */
+
 @keyframes slideInLeft {
+
   from {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
   }
+
 }
 
 @keyframes slideInRight {
+
   from {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
   }
+
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-20px);
   }
+
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:768px) {
+
   .hero {
     min-height: 500px;
-    margin-top: 0;
   }
 
   .heroContent {
+
     grid-template-columns: 1fr;
+
     padding: 3rem 1.5rem;
+
     gap: 2rem;
+
   }
 
   .heroTitle {
@@ -162,11 +271,13 @@
   .decorBottom {
     display: none;
   }
+
 }
 
-@media (max-width: 480px) {
+@media (max-width:480px) {
+
   .hero {
-    min-height: 400px;
+    min-height: 420px;
   }
 
   .heroContent {
@@ -182,7 +293,11 @@
   }
 
   .heroButton {
-    padding: 0.8rem 2rem;
+
+    padding: .8rem 2rem;
+
     font-size: 1rem;
+
   }
+
 }

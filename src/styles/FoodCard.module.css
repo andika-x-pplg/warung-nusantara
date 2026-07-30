@@ -1,13 +1,23 @@
 /* Food Card Styles */
 
 .card {
-  background-color: var(--bg-white);
-  border-radius: var(--radius);
+  background-color: var(--card-background);
+  color: var(--card-text);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  box-shadow: var(--card-shadow);
+
+  height: 100%;
   display: flex;
   flex-direction: column;
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -51,7 +61,7 @@
 .cardName {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-dark);
+  color: var(--card-text);
   margin: 0;
 }
 
@@ -66,19 +76,41 @@
   white-space: nowrap;
 }
 
-.categoryBadge.makanan {
-  background-color: #ffd89b;
-  color: #8b5a00;
+:global(body.dark-mode) .categoryBadge.makanan {
+  background: rgba(255, 152, 0, 0.18);
+  color: #ffcc80;
+  border: 1px solid rgba(255, 152, 0, 0.35);
 }
 
-.categoryBadge.minuman {
-  background-color: #b3e5fc;
-  color: #01579b;
+:global(body.dark-mode) .categoryBadge.minuman {
+  background: rgba(3, 169, 244, 0.18);
+  color: #81d4fa;
+  border: 1px solid rgba(3, 169, 244, 0.35);
+}
+
+:global(body.dark-mode) .categoryBadge.makanan {
+  background-color: rgba(255, 140, 0, 0.2);
+  color: #ffb74d;
+  border: 1px solid rgba(255, 140, 0, 0.35);
+}
+
+:global(body.dark-mode) .categoryBadge.minuman {
+  background-color: rgba(3, 169, 244, 0.18);
+  color: #81d4fa;
+  border: 1px solid rgba(3, 169, 244, 0.35);
+}
+
+.menuTitle {
+  color: var(--card-text);
+}
+
+.menuSubtitle {
+  color: var(--secondary-text);
 }
 
 .cardDescription {
   font-size: 0.9rem;
-  color: var(--text-light);
+  color: var(--secondary-text);
   margin-bottom: 1rem;
   line-height: 1.4;
 }
@@ -108,7 +140,7 @@
   align-items: center;
   gap: 0.25rem;
   font-size: 0.9rem;
-  color: var(--text-light);
+  color: var(--secondary-text);
 }
 
 .star {
@@ -141,20 +173,31 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #ff3b30;
-  color: white;
-  padding: 0.4rem 0.8rem;
+
+  background: linear-gradient(135deg, #ff5b4d, #ff3b30);
+  color: #ffffff;
+
+  padding: 0.45rem 0.9rem;
+
   border-radius: 20px;
+
   font-size: 0.75rem;
   font-weight: 700;
-  animation: pulse 2s infinite;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  z-index: 10;
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
   }
+
   50% {
     box-shadow: 0 0 0 10px rgba(255, 59, 48, 0);
   }
@@ -227,4 +270,60 @@
     flex-direction: column;
     align-items: flex-start;
   }
+}
+
+/* ===========================================
+   DARK MODE FOOD CARD
+=========================================== */
+
+:global(body.dark-mode) .card {
+  background: #23272f;
+  border: 1px solid #3b4352;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+}
+
+:global(body.dark-mode) .card:hover {
+  background: #2c313c;
+  border-color: #ff9800;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.55);
+}
+
+:global(body.dark-mode) .cardName {
+  color: #ffffff;
+}
+
+:global(body.dark-mode) .cardDescription {
+  color: #c7c7c7;
+}
+
+:global(body.dark-mode) .rating {
+  color: #d0d0d0;
+}
+
+:global(body.dark-mode) .price {
+  color: #ffb74d;
+}
+
+:global(body.dark-mode) .cardImage img {
+  filter: brightness(0.92);
+}
+
+:global(body.dark-mode) .card:hover .cardImage img {
+  filter: brightness(1);
+}
+
+:global(body.dark-mode) .addToCartBtn {
+  background: linear-gradient(135deg, #ff9800, #ff6f00);
+}
+
+:global(body.dark-mode) .addToCartBtn:hover {
+  background: linear-gradient(135deg, #ffb300, #ff8f00);
+}
+
+:global(body.dark-mode) .popularBadge {
+  background: linear-gradient(135deg, #ff5252, #ff1744);
+}
+
+:global(body.dark-mode) .star {
+  color: #ffd54f;
 }

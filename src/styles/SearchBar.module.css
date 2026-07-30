@@ -1,58 +1,93 @@
-/* Search Bar Styles */
+/* ==========================================
+   Search Bar
+========================================== */
 
 .searchBar {
   width: 100%;
   display: flex;
   justify-content: center;
+
   padding: 2rem;
-  background-color: var(--bg-white);
-  margin: 2rem 0;
+
+  background: var(--card-background);
+
+  transition: background-color .3s ease;
 }
 
 .searchContainer {
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
   position: relative;
 }
 
 .searchInput {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius);
+
+  padding: .9rem 1rem .9rem 2.8rem;
+
+  border: 2px solid var(--card-border);
+  border-radius: 14px;
+
   font-size: 1rem;
-  transition: var(--transition);
-  background-color: var(--bg-light);
+
+  background: var(--card-background);
+  color: var(--card-text);
+
+  transition: all .3s ease;
+}
+
+.searchInput::placeholder {
+  color: var(--secondary-text);
 }
 
 .searchInput:focus {
+
   outline: none;
+
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
-  background-color: var(--bg-white);
+
+  box-shadow:
+    0 0 0 4px rgba(255, 149, 0, .15);
+
 }
 
 .searchIcon {
+
   position: absolute;
-  left: 0.75rem;
+
+  left: 1rem;
   top: 50%;
+
   transform: translateY(-50%);
-  color: var(--text-light);
-  font-size: 1.2rem;
+
+  color: var(--secondary-text);
+
+  font-size: 1.15rem;
+
 }
 
 .clearButton {
+
   position: absolute;
-  right: 0.75rem;
+
+  right: 1rem;
   top: 50%;
+
   transform: translateY(-50%);
+
   background: none;
   border: none;
-  color: var(--text-light);
+
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: var(--transition);
+
+  color: var(--secondary-text);
+
+  font-size: 1.1rem;
+
   display: none;
+
+  transition: .25s;
+
 }
 
 .clearButton.show {
@@ -63,8 +98,67 @@
   color: var(--primary-color);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ==========================================
+   Dark Mode
+========================================== */
+
+:global(body.dark-mode) .searchBar {
+
+  background: #242424;
+
+}
+
+:global(body.dark-mode) .searchInput {
+
+  background: #2d2d2d;
+
+  color: #ffffff;
+
+  border: 1px solid #3a3a3a;
+
+}
+
+:global(body.dark-mode) .searchInput::placeholder {
+
+  color: #9f9f9f;
+
+}
+
+:global(body.dark-mode) .searchInput:focus {
+
+  border-color: #ff9500;
+
+  background: #333333;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 149, 0, .18);
+
+}
+
+:global(body.dark-mode) .searchIcon {
+
+  color: #cfcfcf;
+
+}
+
+:global(body.dark-mode) .clearButton {
+
+  color: #cfcfcf;
+
+}
+
+:global(body.dark-mode) .clearButton:hover {
+
+  color: #ff9500;
+
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:768px) {
+
   .searchBar {
     padding: 1.5rem 1rem;
   }
@@ -74,23 +168,34 @@
   }
 
   .searchInput {
-    padding: 0.65rem 1rem 0.65rem 2.2rem;
-    font-size: 0.95rem;
+
+    padding: .8rem 1rem .8rem 2.6rem;
+
+    font-size: .95rem;
+
   }
+
 }
 
-@media (max-width: 480px) {
+@media (max-width:480px) {
+
   .searchBar {
-    padding: 1rem 0.75rem;
+    padding: 1rem .75rem;
   }
 
   .searchInput {
-    padding: 0.6rem 0.75rem 0.6rem 2rem;
-    font-size: 0.9rem;
+
+    padding: .75rem .9rem .75rem 2.4rem;
+
+    font-size: .9rem;
+
   }
 
   .searchIcon,
   .clearButton {
+
     font-size: 1rem;
+
   }
+
 }

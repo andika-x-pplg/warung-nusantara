@@ -6,7 +6,7 @@ import { formatCurrency } from '../data/foods';
  * Cart Component
  * Sliding cart sidebar displaying cart items, quantities, and total
  */
-function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
+function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem, onCheckout }) {
   // Calculate total price
   const totalPrice = cartItems.reduce((sum, item) => {
     return sum + item.price * item.quantity;
@@ -67,7 +67,27 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
                   >
                     −
                   </button>
-                  <div className={styles.quantity}>{item.quantity}</div>
+                  <input
+                    type="number"
+                    min="1"
+                    max="99"
+                    className={styles.quantityInput}
+                    value={item.quantity}
+                    onChange={(e) => {
+                      let value = Number(e.target.value);
+
+                      if (value > 99) value = 99;
+
+                      if (value >= 1) {
+                        onUpdateQuantity(item.id, value);
+                      }
+                    }}
+                    onBlur={(e) => {
+                      if (e.target.value === "" || Number(e.target.value) < 1) {
+                        onUpdateQuantity(item.id, 1);
+                      }
+                    }}
+                  />
                   <button
                     className={styles.quantityBtn}
                     onClick={() =>
@@ -99,12 +119,9 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
                 {formatCurrency(totalPrice)}
               </span>
             </div>
-            <button className={styles.checkoutBtn} disabled>
+            <button className={styles.checkoutBtn} onClick={onCheckout}>
               Checkout ({totalItems} items)
             </button>
-            <p style={{ textAlign: 'center', fontSize: '0.85rem', marginTop: '0.75rem', color: '#7f8c8d' }}>
-              * Checkout sedang dalam pengembangan
-            </p>
           </div>
         )}
       </div>
