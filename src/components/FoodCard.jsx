@@ -60,6 +60,10 @@ function FoodCard({ food, onAddToCart }) {
           {/* Description */}
           <p className={styles.cardDescription}>{food.description}</p>
 
+          <p className={styles.stock}>
+            Stok: {food.stock}
+          </p>
+
           {/* Footer with Price, Rating, and Button */}
           <div className={styles.cardFooter}>
             <div className={styles.priceAndRating}>

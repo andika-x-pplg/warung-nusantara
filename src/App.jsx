@@ -25,6 +25,19 @@ function App() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [foodList, setFoodList] = useState(() => {
+    const savedFoods = localStorage.getItem("foods");
+
+    if (savedFoods) {
+      return JSON.parse(savedFoods);
+    }
+
+    return foods;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("foods", JSON.stringify(foodList));
+  }, [foodList]);
 
   // Simulate loading animation on mount
   useEffect(() => {
@@ -150,7 +163,7 @@ function App() {
 
       {/* Menu Section */}
       <MenuSection
-        foods={foods}
+        foods={foodList}
         activeFilter={activeFilter}
         searchQuery={searchQuery}
         onAddToCart={handleAddToCart}
