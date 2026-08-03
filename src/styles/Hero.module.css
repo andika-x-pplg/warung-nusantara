@@ -301,3 +301,161 @@
   }
 
 }
+
+/* ==========================================
+   RESTOCK CARD
+========================================== */
+
+.restockCard {
+  margin: 2rem 0;
+
+  background: rgba(255, 255, 255, .18);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, .25);
+
+  border-radius: 18px;
+
+  padding: 20px;
+
+  width: fit-content;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+}
+
+.restockCard h3 {
+  margin: 0 0 15px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.countdown {
+
+  font-size: 2.3rem;
+  font-weight: 800;
+
+  color: #fff;
+
+  letter-spacing: 3px;
+
+  margin-bottom: 20px;
+
+  text-shadow: 0 3px 8px rgba(0, 0, 0, .2);
+
+}
+
+.infoGrid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 12px;
+
+}
+
+.infoBox {
+
+  background: rgba(255, 255, 255, .15);
+
+  border-radius: 12px;
+
+  padding: 12px;
+
+  text-align: center;
+
+  transition: .3s;
+
+}
+
+.infoBox:hover {
+
+  transform: translateY(-4px);
+
+  background: rgba(255, 255, 255, .22);
+
+}
+
+.infoBox span {
+
+  display: block;
+
+  font-size: 1.6rem;
+
+}
+
+.infoBox strong {
+
+  display: block;
+
+  font-size: 1.5rem;
+
+  margin: 5px 0;
+
+}
+
+.infoBox small {
+
+  font-size: .8rem;
+
+  opacity: .9;
+
+}
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+:global(body.dark-mode) .restockCard {
+
+  background: rgba(35, 39, 47, .95);
+
+  border: 1px solid #3b4352;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+
+}
+
+:global(body.dark-mode) .countdown {
+
+  color: #ffb74d;
+
+}
+
+:global(body.dark-mode) .infoBox {
+
+  background: #2d323d;
+
+}
+
+:global(body.dark-mode) .infoBox:hover {
+
+  background: #363d49;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px) {
+
+  .restockCard {
+
+    width: 100%;
+
+  }
+
+  .infoGrid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .countdown {
+
+    font-size: 1.8rem;
+
+  }
+
+}

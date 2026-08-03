@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './styles/index.css';
 import { foods } from './data/foods';
 import Navbar from './components/Navbar';
@@ -35,9 +35,70 @@ function App() {
     return foods;
   });
 
+  const [nextRestock, setNextRestock] = useState(() => {
+    const saved = localStorage.getItem("nextRestock");
+
+    if (saved) {
+      return Number(saved);
+    }
+
+    const tomorrow = Date.now() + 24 * 60 * 60 * 1000;
+    localStorage.setItem("nextRestock", tomorrow);
+
+    return tomorrow;
+  });
+
   useEffect(() => {
     localStorage.setItem("foods", JSON.stringify(foodList));
   }, [foodList]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+
+      const now = Date.now();
+      const diff = nextRestock - now;
+
+      if (diff <= 0) {
+
+        const updatedFoods = foodList.map(food => {
+
+          const randomStock =
+            Math.floor(Math.random() * 151) + 50;
+
+          return {
+            ...food,
+            stock: randomStock,
+            maxStock: randomStock,
+          };
+
+        });
+
+        setFoodList(updatedFoods);
+
+        const newTime =
+          Date.now() + 24 * 60 * 60 * 1000;
+
+        setNextRestock(newTime);
+
+        localStorage.setItem(
+          "nextRestock",
+          newTime
+        );
+
+        return;
+      }
+
+      setCountdown({
+        hours: Math.floor(diff / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
+      });
+
+    }, 1000);
+
+    return () => clearInterval(interval);
+
+  }, [nextRestock, foodList]);
 
   // Simulate loading animation on mount
   useEffect(() => {
@@ -58,43 +119,80 @@ function App() {
 
   // Handle adding items to cart
   const handleAddToCart = (food) => {
-    const existingItem = cartItems.find((item) => item.id === food.id);
+    const latestFood = foodList.find((item) => item.id === food.id);
+
+    if (!latestFood) return;
+
+    if (latestFood.stock <= 0) {
+      alert(`${latestFood.name} sudah habis.`);
+      return;
+    }
+
+    const existingItem = cartItems.find(
+      (item) => item.id === food.id
+    );
 
     if (existingItem) {
-      // If item exists, increase quantity
+      if (existingItem.quantity >= latestFood.stock) {
+        alert(
+          `Stok ${latestFood.name} hanya tersisa ${latestFood.stock}`
+        );
+        return;
+      }
+
       setCartItems(
         cartItems.map((item) =>
           item.id === food.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
             : item
         )
       );
     } else {
-      // If item doesn't exist, add it with quantity 1
       setCartItems([
         ...cartItems,
         {
-          ...food,
+          ...latestFood,
           quantity: 1,
         },
       ]);
     }
 
-    // Show notification (optional)
-    showNotification(`${food.name} ditambahkan ke keranjang!`);
+    showNotification(`${latestFood.name} ditambahkan ke keranjang!`);
   };
 
   // Handle updating item quantity
   const handleUpdateQuantity = (foodId, newQuantity) => {
-    if (newQuantity === 0) {
+    const food = foodList.find(
+      (item) => item.id === foodId
+    );
+
+    if (!food) return;
+
+    if (newQuantity <= 0) {
       handleRemoveItem(foodId);
-    } else {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === foodId ? { ...item, quantity: newQuantity } : item
-        )
-      );
+      return;
     }
+
+    if (newQuantity > food.stock) {
+      alert(
+        `Stok ${food.name} hanya tersisa ${food.stock}`
+      );
+      return;
+    }
+
+    setCartItems(
+      cartItems.map((item) =>
+        item.id === foodId
+          ? {
+            ...item,
+            quantity: newQuantity,
+          }
+          : item
+      )
+    );
   };
 
   // Handle removing item from cart
@@ -127,14 +225,41 @@ function App() {
 
   // After successful order: clear cart, close cart sidebar
   const handleOrderSuccess = () => {
+
+    const updatedFoods = foodList.map(food => {
+
+      const orderedItem = cartItems.find(
+        item => item.id === food.id
+      );
+
+      if (orderedItem) {
+        return {
+          ...food,
+          stock: Math.max(food.stock - orderedItem.quantity, 0)
+        };
+      }
+
+      return food;
+    });
+
+    setFoodList(updatedFoods);
+
     setCartItems([]);
+
     setIsCartOpen(false);
+
   };
 
   // Simple notification system (could be enhanced with toast library)
   const showNotification = (message) => {
     console.log('✓', message);
   };
+
+  const [countdown, setCountdown] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   return (
     <div className="app">
@@ -147,8 +272,13 @@ function App() {
       />
 
       {/* Hero Section */}
-      <Hero onMenuClick={handleMenuClick} />
-
+      <Hero
+        onMenuClick={handleMenuClick}
+        countdown={countdown}
+        totalFoods={foodList.length}
+        availableFoods={foodList.filter(food => food.stock > 0).length}
+        outOfStockFoods={foodList.filter(food => food.stock === 0).length}
+      />
       {/* Search Bar */}
       <SearchBar
         searchQuery={searchQuery}
