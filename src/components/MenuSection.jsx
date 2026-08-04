@@ -29,8 +29,16 @@ function MenuSection({
     // Apply category filter
     if (activeFilter === 'makanan') {
       filtered = filtered.filter((food) => food.category === 'makanan');
+
     } else if (activeFilter === 'minuman') {
       filtered = filtered.filter((food) => food.category === 'minuman');
+
+    } else if (activeFilter === 'snack&cemilan') {
+      filtered = filtered.filter((food) => food.category === 'snack&cemilan');
+
+    } else if (activeFilter === 'dessert') {
+      filtered = filtered.filter((food) => food.category === 'dessert');
+
     } else if (activeFilter === 'popular') {
       filtered = filtered.filter((food) => food.isPopular);
     }

@@ -28,11 +28,28 @@ function App() {
   const [foodList, setFoodList] = useState(() => {
     const savedFoods = localStorage.getItem("foods");
 
-    if (savedFoods) {
-      return JSON.parse(savedFoods);
+    if (!savedFoods) {
+      return foods;
     }
 
-    return foods;
+    const localFoods = JSON.parse(savedFoods);
+
+    // Gabungkan data baru dari foods.js dengan data lama di localStorage
+    const mergedFoods = foods.map((food) => {
+      const oldFood = localFoods.find((item) => item.id === food.id);
+
+      if (oldFood) {
+        return {
+          ...food,
+          stock: oldFood.stock,
+          maxStock: oldFood.maxStock,
+        };
+      }
+
+      return food;
+    });
+
+    return mergedFoods;
   });
 
   const [nextRestock, setNextRestock] = useState(() => {

@@ -11,6 +11,8 @@ function Filter({ activeFilter, onFilterChange }) {
     { id: 'makanan', label: 'Makanan' },
     { id: 'minuman', label: 'Minuman' },
     { id: 'popular', label: 'Popular' },
+    { id: 'snack&cemilan', label: 'Snack & Cemilan'},
+    { id: 'dessert', label: 'Dessert'},
   ];
 
   return (

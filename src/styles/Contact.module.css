@@ -95,7 +95,8 @@
 ========================================== */
 
 .mapContainer {
-  height: 400px;
+  height: 100%;
+  
   overflow: hidden;
 
   background: var(--card-background);
