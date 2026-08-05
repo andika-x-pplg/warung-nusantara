@@ -18,7 +18,7 @@
 }
 
 .modal {
-  width: 540px;
+  width: min(540px, 100%);
   max-width: 100%;
   max-height: 90vh;
   background: #ffffff;
@@ -45,7 +45,7 @@
 }
 
 .successModal {
-  width: 460px;
+  width: min(460px, 100%);
 }
 
 .header {

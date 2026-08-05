@@ -41,13 +41,29 @@ function App() {
       if (oldFood) {
         return {
           ...food,
-          stock: oldFood.stock,
-          maxStock: oldFood.maxStock,
+          stock:
+            oldFood.stock !== undefined
+              ? oldFood.stock
+              : food.stock,
+
+          maxStock:
+            oldFood.maxStock !== undefined
+              ? oldFood.maxStock
+              : food.maxStock,
+
+          sold:
+            oldFood.sold !== undefined
+              ? oldFood.sold
+              : food.sold,
         };
       }
 
       return food;
     });
+
+    console.log(
+      mergedFoods.find(food => food.id === 44)
+    );
 
     return mergedFoods;
   });

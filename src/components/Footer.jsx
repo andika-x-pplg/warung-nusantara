@@ -31,10 +31,26 @@ function Footer() {
   };
 
   const socialIcons = [
-    { icon: '📘', label: 'Facebook' },
-    { icon: '🐦', label: 'Twitter' },
-    { icon: '📷', label: 'Instagram' },
-    { icon: '▶️', label: 'YouTube' },
+    {
+      icon: "📘",
+      label: "Tiktok",
+      url: "tiktok.com/@dik9893",
+    },
+    {
+      icon: "📷",
+      label: "Instagram",
+      url: "https://www.instagram.com/andika_esda_saputra?igsh=MWx4d291dncxdHVzeA==",
+    },
+    {
+      icon: "▶️",
+      label: "YouTube",
+      url: "https://youtube.com/@animasi_ai_v.2025?si=EzqzAPKxahrVF3Ty",
+    },
+    {
+      icon: "🐙",
+      label: "GitHub",
+      url: "https://github.com/andika-x-pplg",
+    },
   ];
 
   return (
@@ -53,10 +69,11 @@ function Footer() {
               {socialIcons.map((social, index) => (
                 <a
                   key={index}
-                  href="#"
+                  href={social.url}
                   className={styles.socialIcon}
                   title={social.label}
-                  onClick={(e) => e.preventDefault()}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {social.icon}
                 </a>
@@ -122,9 +139,8 @@ function Footer() {
             &copy; 2024 Warung Nusantara. Semua hak cipta dilindungi.
           </div>
           <button
-            className={`${styles.backToTopBtn} ${
-              showBackToTop ? styles.show : ''
-            }`}
+            className={`${styles.backToTopBtn} ${showBackToTop ? styles.show : ''
+              }`}
             onClick={scrollToTop}
             aria-label="Back to top"
           >

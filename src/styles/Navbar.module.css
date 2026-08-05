@@ -6,7 +6,7 @@
   z-index: 1000;
   background-color: var(--bg-white);
   box-shadow: var(--shadow);
-  padding: 0 2rem;
+  padding: 0 clamp(1rem, 2vw, 2rem);
   border-bottom: 1px solid var(--border-color);
   transition: var(--transition);
 }
@@ -156,6 +156,13 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
+    width: 100%;
+  }
+
+  .navLinks a {
+    display: block;
+    width: 100%;
+    text-align: center;
   }
 
   .navLinks.active {
@@ -168,6 +175,16 @@
 
   .cartIcon {
     font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    gap: 1rem;
+  }
+
+  .logo {
+    font-size: 1.25rem;
   }
 }
 

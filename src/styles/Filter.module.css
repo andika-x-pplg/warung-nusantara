@@ -133,7 +133,14 @@
     padding: 1rem;
 
     gap: .75rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
 
+  .filterSection::-webkit-scrollbar {
+    display: none;
   }
 
   .filterBtn {
@@ -141,6 +148,7 @@
     padding: .6rem 1.3rem;
 
     font-size: .95rem;
+    flex: 0 0 auto;
 
   }
 

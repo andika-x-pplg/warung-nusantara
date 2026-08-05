@@ -52,6 +52,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .cardHeader {
@@ -93,6 +94,7 @@
   color: var(--secondary-text);
   margin-bottom: 1rem;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .cardFooter {
@@ -284,8 +286,18 @@
     font-size: 1.1rem;
   }
 
+  .cardFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .priceAndRating {
+    width: 100%;
+  }
+
   .addToCartBtn {
-    padding: 0.5rem 1rem;
+    width: 100%;
+    padding: 0.65rem 1rem;
     font-size: 0.9rem;
   }
 }
@@ -302,6 +314,7 @@
   .cardHeader {
     flex-direction: column;
     gap: 0.5rem;
+    align-items: flex-start;
   }
 
   .cardName {

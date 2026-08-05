@@ -69,15 +69,19 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .menuSection {
+    padding: 3.5rem 1.5rem;
+  }
+
   .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .menuSection {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.25rem;
   }
 
   .menuTitle {
@@ -85,7 +89,7 @@
   }
 
   .menuGrid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.25rem;
   }
 }
@@ -97,6 +101,10 @@
 
   .menuTitle {
     font-size: 1.5rem;
+  }
+
+  .menuSubtitle {
+    font-size: 0.95rem;
   }
 
   .menuGrid {
